@@ -1,1 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomia Moçambicana - Restaurante</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f5f5, #e8f4f8);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .logo span {
+            color: #f39c12;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            background: #e74c3c;
+        }
+        
+        .page {
+            display: none;
+            padding: 4rem 0;
+            min-height: 80vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .hero {
+            text-align: center;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .menu-category {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .menu-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .menu-item h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .menu-item p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: right;
+        }
+        
+        .reserva-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #e74c3c;
+            outline: none;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .contact-icon {
+            background: #e74c3c;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .grupo-info {
+            background: #34495e;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        .assinatura {
+            font-style: italic;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">Gastronomia <span>Moçambicana</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Início</a></li>
+                    <li><a href="#" class="nav-link" data-page="menu">Menu</a></li>
+                    <li><a href="#" class="nav-link" data-page="reserva">Reserva</a></li>
+                    <li><a href="#" class="nav-link" data-page="contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
+    <section id="home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <h1>Sabores da Terra</h1>
+                <p>Descubra a autêntica culinária moçambicana em cada prato. Ingredientes frescos, sabores tradicionais.</p>
+                <a href="#" class="btn nav-link" data-page="menu">Ver Menu</a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <h2>Horário de Funcionamento</h2>
+                <p style="font-size: 1.1rem; margin-top: 1rem;">
+                    <strong>Segunda - Sexta:</strong> 11h00 - 22h00<br>
+                    <strong>Sábado - Domingo:</strong> 12h00 - 23h00
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="page">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 3rem; color: #2c3e50;">Nosso Menu</h1>
+            
+            <div class="menu-category">
+                <h2 class="category-title">Pratos Principais</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <h3>Matata</h3>
+                        <p>Amêijoas frescas com amendoim, alho e cebola. Servido com arroz branco.</p>
+                        <div class="price">450 M</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Frango à Zambeziana</h3>
+                        <p>Frango grelhado com molho picante de limão e piri-piri. Acompanha batata frita.</p>
+                        <div class="price">550 MT</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Caril de Camarão</h3>
+                        <p>Camarões frescos em caril cremoso de coco. Servido com arroz branco.</p>
+                        <div class="price">650 MT</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-category">
+                <h2 class="category-title">Especialidades da Casa</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <h3>Feijoada à Moçambicana</h3>
+                        <p>Feijão frade com carne de porco, linguiça e couve. Tempero especial.</p>
+                        <div class="price">500 MT</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Xima com Peixe Grelhado</h3>
+                        <p>Peixe fresco grelhado com xima e molho de tomate caseiro.</p>
+                        <div class="price">480 MT</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Piri-Piri de Carne</h3>
+                        <p>Carne bovina grelhada com molho piri-piri tradicional. Acompanha salada.</p>
+                        <div class="price">520 MT</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-category">
+                <h2 class="category-title">Bebidas</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <h3>Sumos Naturais</h3>
+                        <p>Manga, Maracujá, Laranja ou Ananás (500ml)</p>
+                        <div class="price">120 MT</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Refrigerantes</h3>
+                        <p>Coca-Cola, Fanta, Sprite (330ml)</p>
+                        <div class="price">80 MT</div>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Cervejas Nacionais</h3>
+                        <p>2M, Laurentina, Manica (500ml)</p>
+                        <div class="price">150 MT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reserva" class="page">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 3rem; color: #2c3e50;">Fazer Reserva</h1>
+            
+            <div class="reserva-container">
+                <form id="reservaForm">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data">Data da Reserva</label>
+                        <input type="date" id="data" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hora">Hora</label>
+                        <input type="time" id="hora" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pessoas">Número de Pessoas</label>
+                        <select id="pessoas" required>
+                            <option value="">Selecione...</option>
+                            <option value="1">1 pessoa</option>
+                            <option value="2">2 pessoas</option>
+                            <option value="3">3 pessoas</option>
+                            <option value="4">4 pessoas</option>
+                            <option value="5">5 pessoas</option>
+                            <option value="16">16+ pessoas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="observacoes">Observações</label>
+                        <textarea id="observacoes" placeholder="Alguma preferência especial?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">Confirmar Reserva</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="page">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 3rem; color: #2c3e50;">Contacte-Nos</h1>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 style="color: #2c3e50; margin-bottom: 2rem;">Informações de Contacto</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Endereço</h3>
+                            <p>Av. 28 de Outubro, nº 123<br>Maputo, Moçambique</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>Telefone</h3>
+                            <p>+258 87 709 5519</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@gastronomiamocambicana.co.mz</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <h3>Horário</h3>
+                            <p>Segunda - Domingo<br>11h00 - 22h00</p>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/258877095519" class="whatsapp-btn" target="_blank">
+                        📱 WhatsApp
+                    </a>
+                </div>
+                
+                <div class="reserva-container">
+                    <h2 style="color: #2c3e50; margin-bottom: 2rem;">Envie uma Mensagem</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="msgNome">Nome</label>
+                            <input type="text" id="msgNome" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="msgEmail">Email</label>
+                            <input type="email" id="msgEmail" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="msgAssunto">Assunto</label>
+                            <input type="text" id="msgAssunto" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="msgMensagem">Mensagem</label>
+                            <textarea id="msgMensagem" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%;">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Gastronomia Moçambicana. Todos os direitos reservados.</p>
+            <p>+258 87 709 5519 | Maputo, Moçambique</p>
+            
+            <div class="grupo-info">
+                <h3>Grupo de Desenvolvimento</h3>
+                <p>Ebane Sualehe Jorge nº25, Oreste Paulo nº62, Joysse Numa nº48, Felson Salvado nº38,<br>
+                Maisa Pedro João nº52, Ednilson Equissor nº28, Esperança Hermínio nº34,<br>
+                Edgar Arlindo M. nº27, Elsa A. Sualehe nº31, Fátima Momade A. nº37,<br>
+                Palmira Sapite nº63, Charifo Issufo Charifo nº15</p>
+                
+                <div class="assinatura">
+                    <p>Desenvolvido por: <strong>Ednilson Equissor</strong></p>
+                    <p>Contacto: +258 87 709 5519</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+            });
+        });
+        
+        document.getElementById('reservaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Reserva enviada com sucesso! Entraremos em contacto para confirmação.');
+            this.reset();
+        });
+        
+        document.querySelector('#contacto form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Responderemos em breve.');
+            this.reset();
+        });
+    </script>
+</body>
+  </html>
