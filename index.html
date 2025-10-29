@@ -72,12 +72,8 @@
         }
         
         .page {
-            display: none;
             padding: 4rem 0;
             min-height: 80vh;
-        }
-        
-        .page.active {
             display: block;
         }
         
@@ -306,21 +302,21 @@
             <div class="logo">Gastronomia <span>Moçambicana</span></div>
             <nav>
                 <ul>
-                    <li><a href="#" class="nav-link active" data-page="home">Início</a></li>
-                    <li><a href="#" class="nav-link" data-page="menu">Menu</a></li>
-                    <li><a href="#" class="nav-link" data-page="reserva">Reserva</a></li>
-                    <li><a href="#" class="nav-link" data-page="contacto">Contacto</a></li>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#reserva">Reserva</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="home" class="page active">
+    <section id="home" class="page">
         <div class="container">
             <div class="hero">
                 <h1>Sabores da Terra</h1>
                 <p>Descubra a autêntica culinária moçambicana em cada prato. Ingredientes frescos, sabores tradicionais.</p>
-                <a href="#" class="btn nav-link" data-page="menu">Ver Menu</a>
+                <a href="#menu" class="btn">Ver Menu</a>
             </div>
             
             <div style="text-align: center; margin-top: 3rem;">
@@ -343,7 +339,7 @@
                     <div class="menu-item">
                         <h3>Matata</h3>
                         <p>Amêijoas frescas com amendoim, alho e cebola. Servido com arroz branco.</p>
-                        <div class="price">450 M</div>
+                        <div class="price">450 MT</div>
                     </div>
                     <div class="menu-item">
                         <h3>Frango à Zambeziana</h3>
@@ -538,45 +534,48 @@
             <p>+258 87 709 5519 | Maputo, Moçambique</p>
             
             <div class="grupo-info">
-                <h3>Grupo de Desenvolvimento</h3>
-                <p>Ebane Sualehe Jorge nº25, Oreste Paulo nº62, Joysse Numa nº48, Felson Salvado nº38,<br>
-                Maisa Pedro João nº52, Ednilson Equissor nº28, Esperança Hermínio nº34,<br>
-                Edgar Arlindo M. nº27, Elsa A. Sualehe nº31, Fátima Momade A. nº37,<br>
-                Palmira Sapite nº63, Charifo Issufo Charifo nº15</p>
+                <h3>👥 Grupo de Desenvolvimento - Classe 11° - Turma B2</h3>
                 
-                <div class="assinatura">
-                    <p>Desenvolvido por: <strong>Ednilson Equissor</strong></p>
-                    <p>Contacto: +258 87 709 5519</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                    <!-- Fileira 1 -->
+                    <div style="background: #2c3e50; padding: 1rem; border-radius: 8px;">
+                        <strong>Fileira 1:</strong><br>
+                        Ebane Sualehe Jorge nº25<br>
+                        Oreste Paulo nº62<br>
+                        Joysse Juma nº48<br>
+                        Felson Salvado nº38
+                    </div>
+                    
+                    <!-- Fileira 2 -->
+                    <div style="background: #2c3e50; padding: 1rem; border-radius: 8px;">
+                        <strong>Fileira 2:</strong><br>
+                        Maisa Pedro João nº52<br>
+                        Ednilson Equissor nº28<br>
+                        Esperança Hermínio nº34<br>
+                        Anderson V. Manuel nº8
+                    </div>
+                    
+                    <!-- Fileira 3 -->
+                    <div style="background: #2c3e50; padding: 1rem; border-radius: 8px;">
+                        <strong>Fileira 3:</strong><br>
+                        Edgar Arlindo M. nº27<br>
+                        Elsa A. Sualehe nº31<br>
+                        Fátima Momade A. nº37<br>
+                        Antônio Luís nº9
+                    </div>
+                    
+                    <!-- Fileira 4 -->
+                    <div style="background: #2c3e50; padding: 1rem; border-radius: 8px;">
+                        <strong>Fileira 4:</strong><br>
+                        Palmira Sapite nº63<br>
+                        Charifo Issufo Charifo nº15<br>
+                        Laurinda Claúdio nº49<br>
+                        Délcio Antônio Oliveira nº22
+                    </div>
 
-    <script>
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                
-                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-                const pageId = this.getAttribute('data-page');
-                document.getElementById(pageId).classList.add('active');
-            });
-        });
-        
-        document.getElementById('reservaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Reserva enviada com sucesso! Entraremos em contacto para confirmação.');
-            this.reset();
-        });
-        
-        document.querySelector('#contacto form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Mensagem enviada com sucesso! Responderemos em breve.');
-            this.reset();
-        });
-    </script>
-</body>
-  </html>
+                    <!-- Fileira 5 -->
+                    <div style="background: #2c3e50; padding: 1rem; border-radius: 8px;">
+                        <strong>Fileira 5:</strong><br>
+                        Carolina Ampasse Amade nº14<br>
+                        Amina Mansur Isaquiele nº4
+          
